@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Spring Boot User Authentication</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+
+<body>
+<div class="header">
+    <div class="title">COVID INDIA DASHBOARD</div>
+</div>
+<div class="login-page">
+    <div class="form">
+        <form class="login-form" th:action="@{/sign-in}" th:method="post">
+            <input type="text" placeholder="email address"  name="email" id="email"/>
+            <input type="password" placeholder="password" id="password" name="password"/>
+            <button>login</button>
+            <p class="message">Not registered? <a href="/sign-up">Create an account</a></p>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>
