@@ -64,7 +64,7 @@
 .datacards label{
     font-family: "Roboto", sans-serif;
     font-weight: bold;
-    font-size: 30px;
+    font-size: larger;
     margin-bottom: 5px;
 }
 
