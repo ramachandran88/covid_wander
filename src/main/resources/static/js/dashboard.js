@@ -20,7 +20,7 @@ $(document).ready(function () {
                     .append($('<td>').text(item.loc))
                     .append($('<td>').text(item.totalConfirmed))
                     .append($('<td>').text(item.discharged))
-                    .append($('<td>').text(deaths))
+                    .append($('<td>').text(item.deaths))
                     .appendTo('#statelist');
 
             });
