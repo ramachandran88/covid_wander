@@ -27,6 +27,7 @@
     flex-direction: row;
     width: 100%;
     overflow: scroll;
+    height: 100%;
 }
 
 .datamaindiv {
@@ -57,6 +58,7 @@
     flex-flow: column;
     align-items: center;
     justify-content: center;
+    border-radius: 5px;
 }
 
 .datacards label{
@@ -93,26 +95,26 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-#customers {
+#statelist {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-#customers td, #customers th {
+#statelist td, #statelist th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#customers tr:nth-child(even) {
+#statelist tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-#customers tr:hover {
+#statelist tr:hover {
     background-color: #ddd;
 }
 
-#customers th {
+#statelist th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;

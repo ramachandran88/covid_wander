@@ -2,6 +2,7 @@
     <title>Spring Boot User Authentication</title>
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/dashboard.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" > </script>
 
@@ -18,24 +19,24 @@
 <div class="datamaindiv">
 
     <div class="data">
-        <div class="confirmedcases datacards">
+        <div class="datacards">
             <label>Total</label>
-            <label>100,0000</label>
+            <label id="confirmedcases" class="count">0</label>
         </div>
-        <div class="activecases datacards">
+        <div class="datacards">
             <label>Active Cases</label>
-            <label>100,0000</label>
+            <label id="activecases"  class="count">0</label>
         </div>
     </div>
 
     <div class="data">
-        <div class="recoveredcases datacards">
+        <div  class= "datacards">
             <label>Recovered Cases</label>
-            <label>100,0000</label>
+            <label id="recoveredcases" class="count">0</label>
         </div>
-        <div class="deaths datacards">
+        <div class="datacards">
             <label>Deaths</label>
-            <label>100,0000</label>
+            <label id="deaths"  class="count">0</label>
         </div>
     </div>
 
@@ -45,151 +46,20 @@
 <div class="graphlistmain">
 <div class="graph" id="graph">
     <canvas id="myChart" width="400" height="400"></canvas>
-    <script>
-        var ctx = document.getElementById('myChart');
-        console.log(ctx);
-
-        var myLineChart = new Chart(ctx, {
-            type: 'line',
-            data:   {
-                datasets: [{
-                    label: 'line Dataset',
-                    data: [10, 20, 30, 40]
-                }],
-                labels: ['January', 'February', 'March', 'April']
-            },
-            options: {
-                responsive:true,
-                maintainAspectRatio: false
-            }
-        });
-
-    </script>
-
 </div>
 <div class="listmaindiv">
-    <table id="customers">
+    <table id="statelist">
         <tr>
-            <th>Company</th>
-            <th>Contact</th>
-            <th>Country</th>
-        </tr>
-        <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
-        </tr>
-        <tr>
-            <td>Berglunds snabbköp</td>
-            <td>Christina Berglund</td>
-            <td>Sweden</td>
-        </tr>
-        <tr>
-            <td>Centro comercial Moctezuma</td>
-            <td>Francisco Chang</td>
-            <td>Mexico</td>
-        </tr>
-        <tr>
-            <td>Ernst Handel</td>
-            <td>Roland Mendel</td>
-            <td>Austria</td>
-        </tr>
-        <tr>
-            <td>Island Trading</td>
-            <td>Helen Bennett</td>
-            <td>UK</td>
-        </tr>
-        <tr>
-            <td>Königlich Essen</td>
-            <td>Philip Cramer</td>
-            <td>Germany</td>
-        </tr>
-        <tr>
-            <td>Laughing Bacchus Winecellars</td>
-            <td>Yoshi Tannamuri</td>
-            <td>Canada</td>
-        </tr>
-        <tr>
-            <td>Magazzini Alimentari Riuniti</td>
-            <td>Giovanni Rovelli</td>
-            <td>Italy</td>
-        </tr>
-        <tr>
-            <td>North/South</td>
-            <td>Simon Crowther</td>
-            <td>UK</td>
-        </tr>
-        <tr>
-            <td>Paris spécialités</td>
-            <td>Marie Bertrand</td>
-            <td>France</td>
+            <th>State</th>
+            <th>Total Confirmed</th>
+            <th>Discharged</th>
+            <th>Deaths</th>
         </tr>
 
-        <tr>
-            <td>Laughing Bacchus Winecellars</td>
-            <td>Yoshi Tannamuri</td>
-            <td>Canada</td>
-        </tr>
-        <tr>
-            <td>Magazzini Alimentari Riuniti</td>
-            <td>Giovanni Rovelli</td>
-            <td>Italy</td>
-        </tr>
-        <tr>
-            <td>North/South</td>
-            <td>Simon Crowther</td>
-            <td>UK</td>
-        </tr>
-        <tr>
-            <td>Paris spécialités</td>
-            <td>Marie Bertrand</td>
-            <td>France</td>
-        </tr>
-
-        <tr>
-            <td>Laughing Bacchus Winecellars</td>
-            <td>Yoshi Tannamuri</td>
-            <td>Canada</td>
-        </tr>
-        <tr>
-            <td>Magazzini Alimentari Riuniti</td>
-            <td>Giovanni Rovelli</td>
-            <td>Italy</td>
-        </tr>
-        <tr>
-            <td>North/South</td>
-            <td>Simon Crowther</td>
-            <td>UK</td>
-        </tr>
-        <tr>
-            <td>Paris spécialités</td>
-            <td>Marie Bertrand</td>
-            <td>France</td>
-        </tr>
-
-        <tr>
-            <td>Laughing Bacchus Winecellars</td>
-            <td>Yoshi Tannamuri</td>
-            <td>Canada</td>
-        </tr>
-        <tr>
-            <td>Magazzini Alimentari Riuniti</td>
-            <td>Giovanni Rovelli</td>
-            <td>Italy</td>
-        </tr>
-        <tr>
-            <td>North/South</td>
-            <td>Simon Crowther</td>
-            <td>UK</td>
-        </tr>
-        <tr>
-            <td>Paris spécialités</td>
-            <td>Marie Bertrand</td>
-            <td>France</td>
-        </tr>
     </table>
 </div>
 </div>
 </div>
+<script src="/js/dashboard.js"></script>
 </body>
 </html>
