@@ -50,7 +50,6 @@ class CovidWanderApplicationTests {
                         new UserRequest("name", "email", "password")
                 ))
         )
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
 
         mvc.perform(post("/sign-in")
@@ -59,14 +58,12 @@ class CovidWanderApplicationTests {
                         new UserRequest("", "email", "password")
                 ))
                 .characterEncoding("UTF-8"))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
 
         mvc.perform(get("/dashboard")
                 .header("Authorization", createHeaders("email", "password"))
                 .characterEncoding("UTF-8")
         )
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk());
 
     }

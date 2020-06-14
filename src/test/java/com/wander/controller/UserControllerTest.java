@@ -37,7 +37,6 @@ class UserControllerTest {
         mvc.perform(post("/sign-in")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(new UserRequest(null, "email", "pass"))))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
@@ -48,7 +47,6 @@ class UserControllerTest {
         mvc.perform(post("/sign-in")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(new UserRequest(null, "email", "pass"))))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
@@ -59,7 +57,6 @@ class UserControllerTest {
         mvc.perform(post("/sign-in")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(new UserRequest(null, "email", "pass"))))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
@@ -69,7 +66,6 @@ class UserControllerTest {
         mvc.perform(post("/sign-up")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(new UserRequest("name", "email", "pass"))))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
@@ -82,7 +78,6 @@ class UserControllerTest {
         mvc.perform(post("/sign-up")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userRequest)))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isConflict())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 

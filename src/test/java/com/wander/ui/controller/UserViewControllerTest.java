@@ -28,7 +28,6 @@ class UserViewControllerTest {
     @Test
     public void givenNoAuthOnSignIn_shouldSucceedWith200() throws Exception {
         mvc.perform(get("/sign-in"))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"));
     }
@@ -36,7 +35,6 @@ class UserViewControllerTest {
     @Test
     public void givenNoAuthOnSignUp_shouldSucceedWith200() throws Exception {
         mvc.perform(get("/sign-up"))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"));
     }

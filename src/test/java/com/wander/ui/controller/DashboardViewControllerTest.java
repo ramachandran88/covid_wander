@@ -29,7 +29,6 @@ class DashboardViewControllerTest {
     @Test
     public void givenAuthRequestOnDashboard_shouldSucceedWith200() throws Exception {
         mvc.perform( get("/dashboard"))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"));
     }
@@ -37,7 +36,6 @@ class DashboardViewControllerTest {
     @Test
     public void givenNoAuthRequestOnDashboard_shouldFailWith302() throws Exception {
         mvc.perform( get("/dashboard"))
-                .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isUnauthorized());
     }
 
