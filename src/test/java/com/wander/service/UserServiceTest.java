@@ -2,6 +2,7 @@ package com.wander.service;
 
 import com.wander.db.model.User;
 import com.wander.db.repository.UserRepository;
+import com.wander.exception.IncorrectCredentialException;
 import com.wander.exception.UserAlreadyExistException;
 import com.wander.ui.model.UserRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +28,6 @@ class UserServiceTest {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private UserService userService;
 
-
     @BeforeEach
     void setUp() {
         userService = new UserService(userRepository, bCryptPasswordEncoder);
@@ -48,6 +48,21 @@ class UserServiceTest {
         when(userRepository.findByEmail("email")).thenReturn(Optional.empty());
         assertThatThrownBy(() -> userService.loadUserByUsername("email"))
                 .isInstanceOf(UsernameNotFoundException.class);
+    }
+
+    @Test
+    void shouldValidateLogin() throws IncorrectCredentialException {
+        when(userRepository.findByEmail("email")).thenReturn(Optional.of(new User("name", "email", "pass")));
+        when(bCryptPasswordEncoder.matches("pass", "pass")).thenReturn(true);
+        assertThat(userService.validateLogin("email", "pass")).isTrue();
+    }
+
+    @Test
+    void shouldThrowIncorrectCredential() {
+        when(userRepository.findByEmail("email")).thenReturn(Optional.of(new User("name", "email", "password")));
+        when(bCryptPasswordEncoder.matches("pass", "password")).thenReturn(false);
+        assertThatThrownBy(() -> userService.validateLogin("email", "pass"))
+                .isInstanceOf(IncorrectCredentialException.class);
     }
 
     @Test

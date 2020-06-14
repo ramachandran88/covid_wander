@@ -1,6 +1,8 @@
 package com.wander.configuration;
 
 import com.wander.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,7 +13,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
+    private final static Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
     private UserService userService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -23,30 +25,33 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
+        http.exceptionHandling().accessDeniedPage("/sign-in");
         http
+                .csrf().disable()
+                .formLogin().disable()
+                //HTTP Basic authentication
                 .authorizeRequests()
-                .antMatchers("/sign-up/**", "/sign-in/**", "/css/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+                .antMatchers("/").permitAll()
+                .antMatchers("/sign-up").permitAll()
+                .antMatchers("/sign-in").permitAll()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/js/**").permitAll()
+                .antMatchers("/performlogout").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/sign-in")
-                .defaultSuccessUrl("/dashboard")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .permitAll();
+                .httpBasic();
 
-        http.sessionManagement()
-                .sessionAuthenticationErrorUrl("/sign-in")
-                .invalidSessionUrl("/sign-in");
+
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/sign-in")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID");
+
+        http.sessionManagement()
+                .sessionAuthenticationErrorUrl("/sign-in")
+                .invalidSessionUrl("/sign-in");
 
     }
 

@@ -2,6 +2,7 @@ package com.wander.service;
 
 import com.wander.db.model.User;
 import com.wander.db.repository.UserRepository;
+import com.wander.exception.IncorrectCredentialException;
 import com.wander.exception.UserAlreadyExistException;
 import com.wander.exception.UserNotFoundException;
 import com.wander.ui.model.UserRequest;
@@ -30,7 +31,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UserNotFoundException {
-        logger.info("-------------checking user details now------------");
+        logger.info("-------------checking user details now for {}", email);
         final Optional<User> optionalUser = userRepository.findByEmail(email);
 
         if (optionalUser.isPresent()) {
@@ -49,8 +50,16 @@ public class UserService implements UserDetailsService {
     private void checkUserExist(UserRequest userRequest) throws UserAlreadyExistException {
         final Optional<User> optionalUser = userRepository.findByEmail(userRequest.getEmail());
         if(optionalUser.isPresent()){
-            throw new UserAlreadyExistException(userRequest);
+            throw new UserAlreadyExistException(userRequest.getEmail());
         }
     }
 
+    public boolean validateLogin(String email, String password) throws IncorrectCredentialException {
+        UserDetails userDetails = loadUserByUsername(email);
+        boolean isSame = bCryptPasswordEncoder.matches(password, userDetails.getPassword());
+        if(isSame){
+            return true;
+        }
+        throw new IncorrectCredentialException(email);
+    }
 }
