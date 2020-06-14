@@ -14,6 +14,11 @@ $("#register-form").bind('submit', (function (event) {
 
         },
         error: function (e) {
+            var message = "Please check Input";
+            if(isJsonString(e.responseText)) {
+                message = JSON.parse(e.responseText).message;
+            }
+            $('#errormessagediv').text(message);
             console.log("error -", e.message);
         }
     })

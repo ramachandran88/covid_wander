@@ -98,3 +98,8 @@ body {
     color: #0d3a11;
     text-decoration: none;
 }
+#errormessagediv{
+    height: 14px;
+    font-size: 13px;
+    color: darkred;
+}

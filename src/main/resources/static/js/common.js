@@ -12,3 +12,12 @@ function getFormData($form){
 function getFullUrl(url){
     return window.location.protocol + "//" +window.location.host + url;
 }
+
+function isJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}

@@ -1,4 +1,5 @@
 $("#signin-form").bind('submit', (function(event){
+    $('#errormessagediv').html("");
     event.preventDefault(); //prevent default action
     var post_url = $(this).attr("action"); //get form action url
     var form_data = getFormData($(this));
@@ -17,6 +18,11 @@ $("#signin-form").bind('submit', (function(event){
             window.location.href = "dashboard"
         },
         error : function (e) {
+            var message = "Please check Input";
+            if(isJsonString(e.responseText)) {
+                message = JSON.parse(e.responseText).message;
+            }
+            $('#errormessagediv').text(message);
             console.log("error -", e.message);
         }
     })
